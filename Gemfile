@@ -4,5 +4,5 @@ gem 'sinatra'
 gem 'data_mapper'
 gem 'mechanize'
 gem 'haml'
-gem 'sqlite3'
+gem 'dm-postgres-adapter'
 gem 'whenever', :require => false

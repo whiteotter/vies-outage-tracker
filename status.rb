@@ -1,5 +1,5 @@
 require 'data_mapper'
-DataMapper.setup(:default, "sqlite://#{File.dirname(File.expand_path(__FILE__))}/data/vies.db")
+DataMapper.setup(:default, ENV['DATABASE_URL'] || "postgres://localhost/vies_status_scraper")
 
 require_relative 'lib/status_scraper'
 
@@ -15,3 +15,4 @@ class Status
 end
 
 DataMapper.finalize
+DataMapper.auto_upgrade!

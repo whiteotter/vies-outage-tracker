@@ -35,12 +35,10 @@ get '/' do
 TEM
 
   seven_days_ago = Time.now.utc - (3600 * 24 * 7)
-  web_access_failed_statuses = Status.all(:created_at.gte => seven_days_ago, :web_access => false)
-  ws_access_failed_statuses  = Status.all(:created_at.gte => seven_days_ago, :ws_access => false)
-  all_statuses = (web_access_failed_statuses | ws_access_failed_statuses).sort_by{ |status| status.created_at }.reverse
+  ws_access_failed_statuses = Status.all(:created_at.gte => seven_days_ago, :ws_access => false)
 
   country_status_lists = {}
-  all_statuses.each do |status|
+  ws_access_failed_statuses.each do |status|
     country_status_lists[status.country_code] ||= []
     country_status_lists[status.country_code] << status
   end

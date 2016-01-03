@@ -8,6 +8,7 @@ EU_COUNTRIES = YAML.load_file('data/eu_countries.yml')
 set :public_folder, 'public'
 
 get '/' do
+  first_status_timestamp = Status.first.created_at
   template = <<-TEM
 !!! 5
 %html
@@ -15,13 +16,14 @@ get '/' do
     %title VIES Service Tracking
   %body
     %h2 Vies Service Outages
+    %p (outage reports starting from #{first_status_timestamp})
     %ul
       - eu_countries.each do |country_code, country_name|
         %li
           - country_url = "/country?code=" + country_code
           %a{:href => country_url, :title => country_name}= country_name
 TEM
-  Haml::Engine.new(template).render(Object.new, eu_countries: EU_COUNTRIES)
+  Haml::Engine.new(template).render(Object.new, eu_countries: EU_COUNTRIES, first_status_timestamp: first_status_timestamp)
 end
 
 get '/country' do

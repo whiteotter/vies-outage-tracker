@@ -29,7 +29,7 @@ module StatusScraper
 
     utc_time = Time.now.utc
     status_list.each do |status|
-      next if (status[:ws_access] && status[:web_access])
+      next if status[:ws_access]
       self.create(country_code: status[:country_code], web_access: status[:web_access], ws_access: status[:ws_access], created_at: utc_time)
     end
   end

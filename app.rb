@@ -68,8 +68,6 @@ get '/country' do
             %img{:src => img_src, :height => 15, :width => 15}
 TEM
 
-  seven_days_ago = Time.now.utc - (3600 * 24 * 7)
-  ws_access_failed_statuses = Status.all(:country_code => country_code, :created_at.gte => seven_days_ago).reverse
-
+  ws_access_failed_statuses = Status.all(:country_code => country_code).reverse
   Haml::Engine.new(template).render(Object.new, outage_scans: ws_access_failed_statuses, country_code: country_code, eu_countries: EU_COUNTRIES)
 end

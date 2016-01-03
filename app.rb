@@ -32,7 +32,7 @@ TEM
 end
 
 get '/country' do
-  country_code = params['code'].upcase
+  country_code = params['code'] ? params['code'].upcase : nil
   unless EU_COUNTRIES.keys.include? country_code
     redirect to('/')
   end

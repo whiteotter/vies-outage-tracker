@@ -18,8 +18,8 @@ every 1.minutes do
   command File.dirname(File.expand_path(__FILE__)) + "/../tasks/run_scraper.rb"
 end
 
-every 1.day do
-  command File.dirname(File.expand_path(__FILE__)) + "/../tasks/rollup_and_remove_past_seven_days.rb"
+every 1.hour do
+  command File.dirname(File.expand_path(__FILE__)) + "/../tasks/wipe_old_statuses.rb"
 end
 
 # Learn more: http://github.com/javan/whenever

@@ -21,7 +21,7 @@ get '/' do
     %title VIES Service Tracking
   %body
     %h2 Vies Service Outages
-    %p (outage reports starting from #{first_status_timestamp})
+    %p outage reports start at #{first_status_timestamp}
     %ul
       - eu_countries.each do |country_code, country_name|
         %li

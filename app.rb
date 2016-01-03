@@ -6,6 +6,11 @@ require_relative 'status'
 EU_COUNTRIES = YAML.load_file('data/eu_countries.yml')
 
 set :public_folder, 'public'
+set :static_cache_control, [:public, max_age: 60 * 60 * 24 * 365]
+
+before do
+  cache_control :public, :must_revalidate, :max_age => 60
+end
 
 get '/' do
   first_status_timestamp = Status.first.created_at

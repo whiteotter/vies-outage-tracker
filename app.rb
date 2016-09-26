@@ -13,7 +13,10 @@ before do
 end
 
 get '/' do
-  first_status_timestamp = Status.first.created_at
+  first_status = Status.first
+  return '<h2>Nothing to see here. Either web scraper is broken or there have been no outages in last 14 days.</h2>' unless first_status
+
+  first_status_timestamp = first_status.created_at
   template = <<-TEM
 !!! 5
 %html
